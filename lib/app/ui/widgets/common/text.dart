@@ -6,7 +6,7 @@ class CommonText extends StatelessWidget {
       {super.key,
       required this.text,
       this.fontSize = 14,
-      this.fontColor = Colors.black,
+      this.fontColor,
       this.fontWeight,
       this.letterSpacing,
       this.textAlign,
@@ -37,7 +37,7 @@ class CommonText extends StatelessWidget {
           decoration: textDecoration,
           fontSize: fontSize,
           fontWeight: fontWeight,
-          color: fontColor,
+          color: fontColor ?? Theme.of(context).colorScheme.primary,
           fontFamily: fontFamily ?? "medium",
           letterSpacing: letterSpacing),
     );

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/auth.dart';
 import '../../../themes/font_size.dart';
 import '../../../utility/utility.dart';
 import '../../widgets/common/button.dart';
+import '../../widgets/common/intl_phone_field.dart';
 import '../../widgets/common/text.dart';
 import '../../widgets/common/textform_field.dart';
 
@@ -45,19 +47,35 @@ class Login extends StatelessWidget {
                       child: Column(
                         children: [
                           CommonTextFormField(
-                            hintText: 'email'.tr,
+                            hintText: 'name'.tr,
                             controller: AuthController.to.name,
                             validator: (data) {
                               return emailValidator(value: data);
                             },
                           ),
-                          CommonTextFormField(
-                            hintText: "password".tr,
-                            controller: AuthController.to.phone,
-                            obscureText: true,
-                            validator: (data) {
-                              return passwordValidator(value: data);
-                            },
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: IntlPhoneField(
+                              maxLength: 10,
+                              hintText: 'enter_phone',
+                              controller: AuthController.to.phone,
+                              initialCountryCode: "IN",
+                              fontFamily: "medium",
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              validator: (data) {
+                                if (data!.isEmpty || data == "") {
+                                  return "phone_empty".tr;
+                                } else if (data.length < 10) {
+                                  return "phone_must_be".tr;
+                                }
+                                return null;
+                              },
+                              onCountryChanged: (data) {
+                                print("country code: ${data.countryCode}");
+                              },
+                            ),
                           ),
                         ],
                       ),

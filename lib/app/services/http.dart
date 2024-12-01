@@ -1,18 +1,26 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../controllers/main.dart';
 
 class HttpHelper {
   Future<dynamic> get(
       {required url,
       bool auth = false,
+      bool cookie = false,
+      var language = "",
       bool contentHeader = false,
       bool cors = false}) async {
     try {
-      Map<String, String> hd =
-          await headers(auth: auth, contentHeader: contentHeader, cors: cors);
+      Map<String, String> hd = await headers(
+          auth: auth,
+          contentHeader: contentHeader,
+          cors: cors,
+          cookie: cookie,
+          language: language);
       if (kDebugMode) {
         print("Passing Url: $url, Passing Headers $hd");
       }
@@ -184,7 +192,7 @@ class HttpHelper {
     }
   }
 
-  headers({auth, contentHeader, cors}) async {
+  headers({auth, contentHeader, cors, cookie, language}) async {
     Map<String, String> headers = {
       HttpHeaders.acceptHeader: "application/json",
     };
@@ -204,6 +212,9 @@ class HttpHelper {
 
     if (contentHeader == true) {
       headers.addAll(contentHeaders);
+    }
+    if (cookie == true) {
+      headers.addAll({'Cookie': 'L=$language%2C'});
     }
     if (cors == true) {
       headers.addAll(corsHeader);

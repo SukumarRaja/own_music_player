@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData light = ThemeData(
   fontFamily: '',
-  primaryColor: const Color(0xFF21409a),
+  primaryColor: const Color(0xFF232845),
   secondaryHeaderColor: const Color(0xFF1ED7AA),
   disabledColor: const Color(0xFFBABFC4),
   brightness: Brightness.light,
@@ -23,7 +23,7 @@ ThemeData light = ThemeData(
   dividerTheme:
       const DividerThemeData(thickness: 0.2, color: Color(0xFFA0A4A8)),
   colorScheme: const ColorScheme.light(
-          primary: Color(0xFF8f8f8f),
+          primary: Color(0xFF30aabf),
           tertiary: Color(0xff9c9c9e),
           tertiaryContainer: Color(0xff171DB6),
           secondary: Color(0xff9c9c9e))

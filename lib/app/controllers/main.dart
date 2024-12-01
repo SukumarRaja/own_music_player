@@ -33,6 +33,22 @@ class MainController extends GetxController {
     _onboardSelectedIndex.value = value;
   }
 
+  final _tabBarIndex = 0.obs;
+
+  get tabBarIndex => _tabBarIndex.value;
+
+  set tabBarIndex(value) {
+    _tabBarIndex.value = value;
+  }
+
+  final _tabBarLength = 4.obs;
+
+  get tabBarLength => _tabBarLength.value;
+
+  set tabBarLength(value) {
+    _tabBarLength.value = value;
+  }
+
   showLanguage() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var language = pref.getString('language');

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../themes/font_size.dart';
 import 'text.dart';
 
@@ -16,14 +17,11 @@ class CommonSearchBar extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         height: 50,
-        margin: const EdgeInsets.only(
-            top: AppFontSize.paddingSizeLarge,
-            right: AppFontSize.paddingSizeDefault,
-            left: AppFontSize.paddingSizeDefault),
+        margin: const EdgeInsets.only(top: AppFontSize.paddingSizeLarge),
         padding: const EdgeInsets.only(left: AppFontSize.paddingSizeDefault),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Theme.of(context).cardColor,
+            color: Theme.of(context).primaryColor.withOpacity(.3),
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).hintColor.withOpacity(.3),
