@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../controllers/home.dart';
 import '../../../themes/font_size.dart';
 import '../common/image_card.dart';
 import '../common/text.dart';
 
-class TrendingNow extends StatelessWidget {
-  const TrendingNow({super.key});
+class NewReleases extends StatelessWidget {
+  const NewReleases({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
       child: ListView.builder(
-          itemCount: HomeController.to.trendingNow.length,
+          itemCount: HomeController.to.newReleases.length,
           shrinkWrap: true,
           primary: false,
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
-            var data = HomeController.to.trendingNow[index];
-            dynamic album;
-            if (data['more_info']['artistMap'] != null) {
-              album =
-                  data['more_info']['artistMap']['artists'][0]['name'] ?? "";
-            } else {
-              album = data['more_info']['listname'] ?? "";
-            }
+            var data = HomeController.to.newReleases[index];
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -52,12 +44,10 @@ class TrendingNow extends StatelessWidget {
                         fontColor: Colors.white,
                       ),
                       CommonText(
-                        text: "${data['type'].toString().capitalize} $album",
+                        text: "${data['subtitle']}",
                         fontSize: AppFontSize.fontSizeExtraSmall,
                         fontColor: Colors.white.withOpacity(.7),
                         fontFamily: 'regular',
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),

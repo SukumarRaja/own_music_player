@@ -26,14 +26,31 @@ class HomeController extends GetxController {
     _trendingNow.value = value;
   }
 
+  final _topPlaylist = <dynamic>[].obs;
+
+  get topPlaylist => _topPlaylist.value;
+
+  set topPlaylist(value) {
+    _topPlaylist.value = value;
+  }
+
+  final _newReleases = <dynamic>[].obs;
+
+  get newReleases => _newReleases.value;
+
+  set newReleases(value) {
+    _newReleases.value = value;
+  }
+
   getLaunchData() async {
     loading = true;
     try {
       var res = await repository.launchData();
       if (statusCode == 200) {
         loading = false;
-        print("res $res");
         trendingNow = res['new_trending'];
+        topPlaylist = res['top_playlists'];
+        newReleases = res['new_albums'];
       } else {
         loading = false;
         showCustomSnackBar("Failed to get launch data $statusCode");
