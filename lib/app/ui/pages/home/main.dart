@@ -46,7 +46,7 @@ class _HomeMainState extends State<HomeMain> {
               fontSize: 10,
             ),
             onTap: (int index) {
-              // MainController.to.currentIndex = index;
+              MainController.to.currentIndex = index;
             },
             tabs: [
               Tab(
