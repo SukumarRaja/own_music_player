@@ -42,6 +42,70 @@ class HomeController extends GetxController {
     _newReleases.value = value;
   }
 
+  final _discover = <dynamic>[].obs;
+
+  get discover => _discover.value;
+
+  set discover(value) {
+    _discover.value = value;
+  }
+
+  final _charts = <dynamic>[].obs;
+
+  get charts => _charts.value;
+
+  set charts(value) {
+    _charts.value = value;
+  }
+
+  final _radio = <dynamic>[].obs;
+
+  get radio => _radio.value;
+
+  set radio(value) {
+    _radio.value = value;
+  }
+
+  final _freshHits = <dynamic>[].obs;
+
+  get freshHits => _freshHits.value;
+
+  set freshHits(value) {
+    _freshHits.value = value;
+  }
+
+  final _bestOf90 = <dynamic>[].obs;
+
+  get bestOf90 => _bestOf90.value;
+
+  set bestOf90(value) {
+    _bestOf90.value = value;
+  }
+
+  final _topAlbums = <dynamic>[].obs;
+
+  get topAlbums => _topAlbums.value;
+
+  set topAlbums(value) {
+    _topAlbums.value = value;
+  }
+
+  final _podCast = <dynamic>[].obs;
+
+  get podCast => _podCast.value;
+
+  set podCast(value) {
+    _podCast.value = value;
+  }
+
+  final _bhakti = <dynamic>[].obs;
+
+  get bhakti => _bhakti.value;
+
+  set bhakti(value) {
+    _bhakti.value = value;
+  }
+
   getLaunchData() async {
     loading = true;
     try {
@@ -51,6 +115,14 @@ class HomeController extends GetxController {
         trendingNow = res['new_trending'];
         topPlaylist = res['top_playlists'];
         newReleases = res['new_albums'];
+        discover = res['browse_discover'];
+        charts = res['charts'];
+        radio = res['radio'];
+        freshHits = res['promo:vx:data:68'];
+        bestOf90 = res['promo:vx:data:185'];
+        topAlbums = res['promo:vx:data:117'];
+        podCast = res['promo:vx:data:139'];
+        bhakti = res['promo:vx:data:163'];
       } else {
         loading = false;
         showCustomSnackBar("Failed to get launch data $statusCode");

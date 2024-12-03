@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controllers/home.dart';
 import '../../../themes/font_size.dart';
 import '../../widgets/common/searchbar.dart';
 import '../../widgets/common/text.dart';
+import '../../widgets/home/best_of_90.dart';
+import '../../widgets/home/bhakti.dart';
+import '../../widgets/home/charts.dart';
+import '../../widgets/home/discover.dart';
+import '../../widgets/home/fresh_hit.dart';
 import '../../widgets/home/new_releases.dart';
+import '../../widgets/home/poscast.dart';
+import '../../widgets/home/radio.dart';
+import '../../widgets/home/top_albums.dart';
 import '../../widgets/home/top_playlist.dart';
 import '../../widgets/home/trending_now.dart';
 
@@ -57,6 +64,46 @@ class Home extends StatelessWidget {
                         buildTitle(title: "New Releases"),
                         const SizedBox(height: 8),
                         const NewReleases(),
+
+                        ///pick your mood
+                        buildTitle(title: "Pick Your Mood"),
+                        const SizedBox(height: 8),
+                        const Discover(),
+
+                        ///charts
+                        buildTitle(title: "Charts"),
+                        const SizedBox(height: 8),
+                        const Charts(),
+
+                        ///fresh hits
+                        buildTitle(title: "Fresh Hits"),
+                        const SizedBox(height: 8),
+                        const FreshHits(),
+
+                        ///best of 90
+                        buildTitle(title: "Best of 90's"),
+                        const SizedBox(height: 8),
+                        const BestOf90(),
+
+                        ///top albums
+                        buildTitle(title: "Top Albums"),
+                        const SizedBox(height: 8),
+                        const TopAlbums(),
+
+                        ///bhakti
+                        buildTitle(title: "Tamil Bhakti"),
+                        const SizedBox(height: 8),
+                        const Bhakti(),
+
+                        ///radio
+                        buildTitle(title: "Radio"),
+                        const SizedBox(height: 8),
+                        const RadioStations(),
+
+                        ///podcast
+                        buildTitle(title: "Podcast"),
+                        const SizedBox(height: 8),
+                        const PodCast(),
                       ],
                     ),
                   ),
