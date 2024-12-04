@@ -1,3 +1,11 @@
 {
-  "app_name": ""
+  "app_name": "Beat",
+  "sign_account": "Login your account",
+  "sign_in": "Login",
+  "enter_name": "Enter your name",
+  "enter_phone": "Enter your phone",
+  "phone_empty": "Phone number cannot be empty",
+  "phone_must_be": "Phone number must be 10 characters",
+  "name_empty": "Name cannot be empty",
+  "name_must_be": "Name must be between 3 and 20 characters"
 }

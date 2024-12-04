@@ -122,7 +122,7 @@ class HomeController extends GetxController {
         bestOf90 = res['promo:vx:data:185'];
         topAlbums = res['promo:vx:data:117'];
         podCast = res['promo:vx:data:139'];
-        bhakti = res['promo:vx:data:163'];
+        bhakti = res['promo:vx:data:164'] ?? [];
       } else {
         loading = false;
         showCustomSnackBar("Failed to get launch data $statusCode");

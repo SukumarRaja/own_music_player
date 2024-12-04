@@ -38,6 +38,7 @@ class IntlPhoneField extends StatefulWidget {
   final bool autofocus;
   final TextInputAction? textInputAction;
   final Function? onSubmit;
+  final bool isEnableValidation;
 
   const IntlPhoneField(
       {super.key,
@@ -73,7 +74,8 @@ class IntlPhoneField extends StatefulWidget {
       this.onSubmit,
       this.fontFamily,
       required this.hintText,
-      this.onEditingComplete});
+      this.onEditingComplete,
+      this.isEnableValidation = false});
 
   @override
   State<IntlPhoneField> createState() => _IntlPhoneFieldState();
@@ -86,6 +88,9 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
   bool empty = false;
   var dialCode = "";
   var codeWithNumber = "";
+  bool isError = false;
+  bool isEmpty = false;
+  bool isLength = false;
 
   FormFieldValidator<String>? validator;
 
@@ -243,67 +248,105 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsetsDirectional.only(bottom: 7, top: 5),
-        height: 50,
-        width: MediaQuery.of(this.context).size.width,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0),
-                  blurRadius: 2,
-                  spreadRadius: 2)
-            ],
-            border: Border.all(color: Colors.grey, width: 1),
-            borderRadius: const BorderRadius.all(Radius.circular(8))),
-        child: Row(
-          children: [
-            buildFlagsButton(),
-            Container(
-              width: 2,
-              height: 48,
-              color: Colors.grey.withOpacity(.4),
-            ),
-            Expanded(
-              child: TextFormField(
-                style: TextStyle(fontFamily: widget.fontFamily, fontSize: 14),
-                keyboardType: TextInputType.number,
-                controller: widget.controller,
-                obscureText: widget.obscureText,
-                maxLength: widget.maxLength,
-                validator: widget.validator,
-                onFieldSubmitted: (data) {
-                  // setState(() {
-                  //   print(
-                  //       "initial country code is ${widget.initialCountryCode}");
-                  //   if (widget.initialCountryCode == "IN") {
-                  //     dialCode = "+91";
-                  //   } else {
-                  //     dialCode = "+93";
-                  //   }
-                  //   codeWithNumber = dialCode + data;
-                  //   print("code with number $codeWithNumber");
-                  //   widget.onSubmitted;
-                  // });
-                },
-                decoration: InputDecoration(
-                    counterText: "",
-                    contentPadding: const EdgeInsets.fromLTRB(10, 15, 8, 0),
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: widget.hintText.tr,
-                    hintStyle: TextStyle(
-                        fontFamily: "medium",
-                        color: Theme.of(context).hintColor)),
-              ),
-            ),
-          ],
-        ));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+            padding: const EdgeInsetsDirectional.only(bottom: 7, top: 5),
+            height: 48,
+            width: MediaQuery.of(this.context).size.width,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0),
+                      blurRadius: 2,
+                      spreadRadius: 2)
+                ],
+                border: Border.all(
+                    color: isError ? Colors.red : Colors.grey, width: 1),
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
+            child: Row(
+              children: [
+                buildFlagsButton(),
+                Container(
+                  width: 2,
+                  height: 48,
+                  color: Colors.grey.withOpacity(.4),
+                ),
+                Expanded(
+                  child: TextFormField(
+                    style:
+                        TextStyle(fontFamily: widget.fontFamily, fontSize: 14),
+                    keyboardType: TextInputType.number,
+                    controller: widget.controller,
+                    obscureText: widget.obscureText,
+                    maxLength: widget.maxLength,
+                    validator: widget.isEnableValidation
+                        ? (data) {
+                            if (data!.isEmpty || data == "") {
+                              setState(() {
+                                isError = true;
+                                isEmpty = true;
+                              });
+                            } else if (data.length < widget.maxLength!) {
+                              if (isEmpty) {
+                                setState(() {
+                                  isEmpty = false;
+                                });
+                              }
+                              setState(() {
+                                isError = true;
+                                isLength = true;
+                              });
+                            } else {
+                              if (isLength) {
+                                setState(() {
+                                  isLength = false;
+                                });
+                              }
+                              setState(() {
+                                isError = false;
+                              });
+                            }
+                            return null;
+                          }
+                        : null,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    decoration: InputDecoration(
+                        counterText: "",
+                        contentPadding: const EdgeInsets.fromLTRB(10, 15, 8, 0),
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10.0),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: widget.hintText.tr,
+                        hintStyle: TextStyle(
+                            fontFamily: widget.fontFamily,
+                            color: Theme.of(context).hintColor)),
+                  ),
+                ),
+              ],
+            )),
+        isError
+            ? Padding(
+                padding: const EdgeInsets.only(left: 15.0, top: 2),
+                child: Text(
+                    isEmpty
+                        ? "phone_empty".tr
+                        : isLength
+                            ? "phone_must_be".tr
+                            : "",
+                    style: const TextStyle(
+                        color: Colors.redAccent,
+                        fontFamily: 'regular',
+                        fontSize: 12)),
+              )
+            : const SizedBox.shrink()
+      ],
+    );
   }
 
   DecoratedBox buildFlagsButton() {

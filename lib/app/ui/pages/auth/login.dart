@@ -26,6 +26,7 @@ class Login extends StatelessWidget {
                 "assets/images/logo.png",
                 height: 200,
               ),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: AppFontSize.paddingSizeDefault),
@@ -37,20 +38,19 @@ class Login extends StatelessWidget {
                       child: CommonText(
                         text: 'sign_account',
                         fontWeight: FontWeight.w600,
-                        fontSize: AppFontSize.fontSizeExtraLarge,
-                        fontColor: Theme.of(context).primaryColor,
+                        fontColor: Theme.of(context).hintColor,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 5),
                     Form(
                       key: AuthController.to.loginFormKey,
                       child: Column(
                         children: [
                           CommonTextFormField(
-                            hintText: 'name'.tr,
+                            hintText: 'enter_name'.tr,
                             controller: AuthController.to.name,
                             validator: (data) {
-                              return emailValidator(value: data);
+                              return nameValidator(value: data);
                             },
                           ),
                           Padding(
@@ -60,39 +60,12 @@ class Login extends StatelessWidget {
                               hintText: 'enter_phone',
                               controller: AuthController.to.phone,
                               initialCountryCode: "IN",
-                              fontFamily: "medium",
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                              ],
-                              validator: (data) {
-                                if (data!.isEmpty || data == "") {
-                                  return "phone_empty".tr;
-                                } else if (data.length < 10) {
-                                  return "phone_must_be".tr;
-                                }
-                                return null;
-                              },
+                              fontFamily: "regular",
+                              isEnableValidation: true,
                               onCountryChanged: (data) {
-                                print("country code: ${data.countryCode}");
+                                AuthController.to.countryCode =
+                                    data.countryCode;
                               },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: () {},
-                            child: CommonText(
-                              text: 'forgot_password',
-                              fontWeight: FontWeight.w600,
-                              fontSize: AppFontSize.fontSizeDefault,
-                              fontColor: Theme.of(context).primaryColor,
                             ),
                           ),
                         ],
@@ -106,28 +79,6 @@ class Login extends StatelessWidget {
                         }),
                   ],
                 ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CommonText(
-                    text: "don't_have_account",
-                    fontSize: AppFontSize.fontSizeDefault,
-                  ),
-                  const SizedBox(width: 10),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed('/register');
-                    },
-                    child: CommonText(
-                      text: 'sign_up',
-                      fontWeight: FontWeight.w600,
-                      fontSize: AppFontSize.fontSizeDefault,
-                      fontColor: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
               ),
             ],
           ),

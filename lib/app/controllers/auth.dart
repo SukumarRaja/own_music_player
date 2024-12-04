@@ -40,6 +40,14 @@ class AuthController extends GetxController {
     _onboardingSelectedIndex.value = value;
   }
 
+  final _countryCode = "+91".obs;
+
+  get countryCode => _countryCode.value;
+
+  set countryCode(value) {
+    _countryCode.value = value;
+  }
+
   loginCheck() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var token = preferences.getString('token');

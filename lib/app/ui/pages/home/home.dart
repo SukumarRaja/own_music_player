@@ -91,7 +91,6 @@ class Home extends StatelessWidget {
                         const TopAlbums(),
 
                         ///bhakti
-                        buildTitle(title: "Tamil Bhakti"),
                         const SizedBox(height: 8),
                         const Bhakti(),
 
