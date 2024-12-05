@@ -64,7 +64,7 @@ class TrendingNow extends StatelessWidget {
                           fontSize: AppFontSize.fontSizeExtraSmall,
                           fontColor: Colors.white.withOpacity(.7),
                           fontFamily: 'regular',
-                          maxLines: 2,
+                          maxLines: 1,
                           textAlign: TextAlign.center,
                         ),
                       ],
