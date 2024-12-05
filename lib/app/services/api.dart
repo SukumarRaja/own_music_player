@@ -2,5 +2,10 @@ import '../config/config.dart';
 
 class ApiService {
   ///config
-  static const homeData = "${AppConfig.baseUrl}${AppConfig.homeData}";
+  static const homeData =
+      "${AppConfig.baseUrl}${AppConfig.version}&__call=webapi.getLaunchData";
+
+  ///song
+  static const songList =
+      "${AppConfig.baseUrl}${AppConfig.version}&__call=webapi.get";
 }

@@ -61,3 +61,8 @@ passwordValidator({value}) {
   }
   return null;
 }
+
+getTokenFromPermaUrl({url}) {
+  var token = url.toString().split('/').last;
+  return token;
+}

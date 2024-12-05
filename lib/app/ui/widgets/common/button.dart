@@ -11,13 +11,15 @@ class CommonButton extends StatelessWidget {
       this.color,
       this.texColor,
       this.isMargin = true,
-      this.fontSize});
+      this.fontSize,
+      this.isRadius});
 
   final String text;
   final Function() onPressed;
   final Color? color;
   final Color? texColor;
   final bool isMargin;
+  final double? isRadius;
   final double? fontSize;
 
   @override
@@ -30,8 +32,8 @@ class CommonButton extends StatelessWidget {
         margin: isMargin ? const EdgeInsets.all(8.0) : EdgeInsets.zero,
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(8.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(isRadius ?? 8.0),
           ),
           color: color ?? Theme.of(context).primaryColor,
         ),

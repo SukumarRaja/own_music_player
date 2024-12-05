@@ -106,6 +106,22 @@ class HomeController extends GetxController {
     _bhakti.value = value;
   }
 
+  final _topGenres = <dynamic>[].obs;
+
+  get topGenres => _topGenres.value;
+
+  set topGenres(value) {
+    _topGenres.value = value;
+  }
+
+  final _cityMode = <dynamic>[].obs;
+
+  get cityMode => _cityMode.value;
+
+  set cityMode(value) {
+    _cityMode.value = value;
+  }
+
   getLaunchData() async {
     loading = true;
     try {
@@ -118,11 +134,13 @@ class HomeController extends GetxController {
         discover = res['browse_discover'];
         charts = res['charts'];
         radio = res['radio'];
+        cityMode = res['city_mod'];
         freshHits = res['promo:vx:data:68'];
+        topGenres = res['promo:vx:data:76'];
         bestOf90 = res['promo:vx:data:185'];
         topAlbums = res['promo:vx:data:117'];
         podCast = res['promo:vx:data:139'];
-        bhakti = res['promo:vx:data:164'] ?? [];
+        bhakti = res['promo:vx:data:165'] ?? [];
       } else {
         loading = false;
         showCustomSnackBar("Failed to get launch data $statusCode");

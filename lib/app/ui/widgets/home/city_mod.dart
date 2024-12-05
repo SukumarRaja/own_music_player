@@ -7,22 +7,21 @@ import '../../pages/song/list.dart';
 import '../common/image_card.dart';
 import '../common/text.dart';
 
-class BestOf90 extends StatelessWidget {
-  const BestOf90({super.key});
+class CityMode extends StatelessWidget {
+  const CityMode({super.key});
 
-  ///mood
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
       child: ListView.builder(
-          itemCount: HomeController.to.bestOf90.length,
+          itemCount: HomeController.to.cityMode.length,
           shrinkWrap: true,
           primary: false,
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
-            var data = HomeController.to.bestOf90[index];
+            var data = HomeController.to.cityMode[index];
             return GestureDetector(
               onTap: () {
                 Get.to(() => SongsList(
@@ -48,14 +47,13 @@ class BestOf90 extends StatelessWidget {
                   SizedBox(
                     width: 160,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CommonText(
-                          text: "${data['title']}",
+                          text: data['title'].toString().split(' ')[0],
                           fontColor: Colors.white,
                         ),
                         CommonText(
-                          text: "${data['subtitle'] ?? ""}",
+                          text: "${data['subtitle']}",
                           fontSize: AppFontSize.fontSizeExtraSmall,
                           fontColor: Colors.white.withOpacity(.7),
                           fontFamily: 'regular',

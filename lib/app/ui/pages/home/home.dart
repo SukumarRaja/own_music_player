@@ -7,12 +7,14 @@ import '../../widgets/common/text.dart';
 import '../../widgets/home/best_of_90.dart';
 import '../../widgets/home/bhakti.dart';
 import '../../widgets/home/charts.dart';
+import '../../widgets/home/city_mod.dart';
 import '../../widgets/home/discover.dart';
 import '../../widgets/home/fresh_hit.dart';
 import '../../widgets/home/new_releases.dart';
 import '../../widgets/home/poscast.dart';
 import '../../widgets/home/radio.dart';
 import '../../widgets/home/top_albums.dart';
+import '../../widgets/home/top_genres.dart';
 import '../../widgets/home/top_playlist.dart';
 import '../../widgets/home/trending_now.dart';
 
@@ -55,7 +57,7 @@ class Home extends StatelessWidget {
                         const SizedBox(height: 5),
 
                         ///top playlist
-                        buildTitle(title: "Top Playlist"),
+                        buildTitle(title: "Editorial Picks"),
                         const SizedBox(height: 8),
                         const TopPlaylist(),
                         const SizedBox(height: 5),
@@ -66,19 +68,29 @@ class Home extends StatelessWidget {
                         const NewReleases(),
 
                         ///pick your mood
-                        buildTitle(title: "Pick Your Mood"),
-                        const SizedBox(height: 8),
-                        const Discover(),
+                        // buildTitle(title: "Pick Your Mood"),
+                        // const SizedBox(height: 8),
+                        // const Discover(),
 
                         ///charts
-                        buildTitle(title: "Charts"),
+                        buildTitle(title: "Top Charts"),
                         const SizedBox(height: 8),
                         const Charts(),
+
+                        ///city mode
+                        buildTitle(title: "What's Hot In Coimbatore"),
+                        const SizedBox(height: 8),
+                        const CityMode(),
 
                         ///fresh hits
                         buildTitle(title: "Fresh Hits"),
                         const SizedBox(height: 8),
                         const FreshHits(),
+
+                        ///top genres
+                        buildTitle(title: "Top Genres & Moods"),
+                        const SizedBox(height: 8),
+                        const TopGenres(),
 
                         ///best of 90
                         buildTitle(title: "Best of 90's"),
