@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../themes/font_size.dart';
+import '../../pages/song/player.dart';
 import '../common/image_card.dart';
 import '../common/text.dart';
 
@@ -12,7 +14,9 @@ class SongCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("play");
+        Get.to(() => SongPlayer(
+              songId: "${data['id']}",
+            ));
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -13,4 +13,9 @@ class SongRepository {
         language: "tamil");
     return jsonDecode(res);
   }
+
+  Future<dynamic> getSongsDetail({params}) async {
+    var res = await helper.get(url: "${ApiService.songDetail}&${params ?? ""}");
+    return jsonDecode(res);
+  }
 }

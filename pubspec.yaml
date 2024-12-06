@@ -21,6 +21,10 @@ dependencies:
   fluttertoast: ^8.2.8
   shimmer_animation: ^2.2.1
   url_launcher: ^6.3.1
+  dart_des: ^1.0.2
+  audio_service: ^0.18.15
+  just_audio: ^0.9.42
+  marquee: ^2.3.0
 
 dev_dependencies:
   flutter_test:

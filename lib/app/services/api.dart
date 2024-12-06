@@ -8,4 +8,7 @@ class ApiService {
   ///song
   static const songList =
       "${AppConfig.baseUrl}${AppConfig.version}&__call=webapi.get";
+
+  static const songDetail =
+      "${AppConfig.baseUrl}${AppConfig.version}&__call=song.getDetails";
 }

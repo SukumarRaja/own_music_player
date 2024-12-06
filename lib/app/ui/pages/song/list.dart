@@ -14,10 +14,13 @@ class SongsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // songDecode(
+    //     mediaUrl:
+    //         "ID2ieOjCrwfgWvL5sXl4B1ImC5QfbsDylQJoo/iq8zOBwQ28V3Q4Q9ZPyyMVFFJjS2Cf3/hRzwHn9CaCt3XGcxw7tS9a8Gtq");
     return GetBuilder(
-        init: SongListController(),
+        init: SongController(),
         initState: (_) {
-          SongListController.to.getSongList(
+          SongController.to.getSongList(
               token: "${getTokenFromPermaUrl(url: permaUrl)}", type: type);
         },
         builder: (_) {
@@ -57,7 +60,7 @@ class SongsList extends StatelessWidget {
                 SizedBox(width: 15),
               ],
             ),
-            body: Obx(() => SongListController.to.loading
+            body: Obx(() => SongController.to.loading
                 ? Center(child: CircularProgressIndicator())
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -74,7 +77,7 @@ class SongsList extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(10.0),
                                       child: CommonCachedImageCard(
                                           image:
-                                              "${SongListController.to.songData['image']}"))),
+                                              "${SongController.to.songData['image'] ?? SongController.to.artistSongData['image']}"))),
                             ),
                             SizedBox(width: 15),
                             Expanded(
@@ -84,19 +87,22 @@ class SongsList extends StatelessWidget {
                                 children: [
                                   CommonText(
                                     text:
-                                        "${SongListController.to.songData['title']}",
+                                        "${SongController.to.songData['title'] ?? SongController.to.artistSongData['name']}",
                                     fontColor: Colors.white,
                                     fontSize: AppFontSize.fontSizeExtraLarge,
                                     fontWeight: FontWeight.w700,
                                     maxLines: 2,
                                   ),
-                                  SongListController
-                                              .to.songData['list_count'] ==
-                                          "0"
+                                  SongController
+                                                  .to.songData['list_count'] ==
+                                              "0" ||
+                                          SongController
+                                                  .to.songData['list_count'] ==
+                                              null
                                       ? const SizedBox.shrink()
                                       : CommonText(
                                           text:
-                                              "${SongListController.to.songData['list_count']} songs",
+                                              "${SongController.to.songData['list_count']} songs",
                                           fontColor: Colors.grey,
                                           // fontSize: AppFontSize.fontSizeLarge,
                                           fontWeight: FontWeight.normal,
@@ -104,7 +110,7 @@ class SongsList extends StatelessWidget {
                                         ),
                                   CommonText(
                                     text:
-                                        "${SongListController.to.songData['year']}",
+                                        "${SongController.to.songData['year'] ?? "${numberFormatter(value: SongController.to.artistSongData['subtitle'].toString().split(' ')[2])} Listeners"}",
                                     fontColor: Colors.grey,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: 'regular',
@@ -171,22 +177,58 @@ class SongsList extends StatelessWidget {
                           fontSize: AppFontSize.fontSizeExtraLarge,
                           fontWeight: FontWeight.w700,
                         ),
+
+                        ///common response data
                         Obx(
-                          () => SongListController.to.songData['list'].length ==
-                                  0
-                              ? SongCard(data: SongListController.to.songData)
-                              : Expanded(
-                                  child: ListView.builder(
-                                      itemCount: SongListController
-                                          .to.songData['list'].length,
-                                      shrinkWrap: true,
-                                      physics: const BouncingScrollPhysics(),
-                                      itemBuilder: (context, index) {
-                                        var data = SongListController
-                                            .to.songData['list'][index];
-                                        return SongCard(data: data);
-                                      }),
-                                ),
+                          () => SongController.to.songData['list'] == null
+                              ? const SizedBox.shrink()
+                              : SongController.to.songData['list'].length ==
+                                      0
+                                  ? SongCard(
+                                      data: SongController.to.songData)
+                                  : Expanded(
+                                      child: ListView.builder(
+                                          itemCount: SongController
+                                              .to.songData['list'].length,
+                                          shrinkWrap: true,
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          itemBuilder: (context, index) {
+                                            var data = SongController
+                                                .to.songData['list'][index];
+                                            return SongCard(data: data);
+                                          }),
+                                    ),
+                        ),
+
+                        ///artist data songs
+                        Obx(
+                          () => SongController
+                                      .to.artistSongData['topSongs'] ==
+                                  null
+                              ? const SizedBox.shrink()
+                              : SongController.to.artistSongData['topSongs']
+                                          .length ==
+                                      0
+                                  ? SongCard(
+                                      data:
+                                          SongController.to.artistSongData)
+                                  : Expanded(
+                                      child: ListView.builder(
+                                          itemCount: SongController
+                                              .to
+                                              .artistSongData['topSongs']
+                                              .length,
+                                          shrinkWrap: true,
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          itemBuilder: (context, index) {
+                                            var data = SongController.to
+                                                    .artistSongData['topSongs']
+                                                [index];
+                                            return SongCard(data: data);
+                                          }),
+                                    ),
                         ),
                         SizedBox(height: 20),
                       ],
