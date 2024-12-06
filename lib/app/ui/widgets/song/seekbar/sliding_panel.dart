@@ -39,7 +39,7 @@ class _SlidingPanelCardState extends State<SlidingPanelCard> {
                 ),
               );
             }),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Stack(
           children: [
             Padding(
@@ -97,7 +97,7 @@ class _SlidingPanelCardState extends State<SlidingPanelCard> {
                 }),
           ],
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
@@ -108,7 +108,7 @@ class _SlidingPanelCardState extends State<SlidingPanelCard> {
                   builder: (context, snap) {
                     return CommonText(
                       text:
-                          "${RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$position')?.group(1) ?? '$position'}",
+                          RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$position')?.group(1) ?? '$position',
                       fontColor: Theme.of(context).disabledColor,
                       fontSize: AppFontSize.fontSizeSmall,
                     );
@@ -118,7 +118,7 @@ class _SlidingPanelCardState extends State<SlidingPanelCard> {
                   builder: (context, snap) {
                     return CommonText(
                         text:
-                            "${RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$duration')?.group(1) ?? '$duration'}");
+                            RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$duration')?.group(1) ?? '$duration');
                   }),
             ],
           ),

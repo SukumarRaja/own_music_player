@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:own_music_player/app/controllers/song.dart';
-import 'package:own_music_player/app/themes/font_size.dart';
 
-import '../common/text.dart';
 import 'seekbar/control_buttons.dart';
 import 'seekbar/sliding_panel.dart';
 
@@ -17,9 +15,9 @@ class SeekBar extends StatelessWidget {
           return Column(
             children: [
               const SizedBox(height: 10),
-              SlidingPanelCard(),
+              const SlidingPanelCard(),
               const SizedBox(height: 30),
-              ControlButtons(),
+              const ControlButtons(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -26,6 +26,7 @@ dependencies:
   just_audio: ^0.9.42
   marquee: ^2.3.0
 
+  audio_session: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:own_music_player/app/utility/utility.dart';
 
 import '../../../controllers/song.dart';
 import '../../../themes/font_size.dart';

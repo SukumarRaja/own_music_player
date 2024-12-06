@@ -24,11 +24,11 @@ class SongCard extends StatelessWidget {
           Container(
               height: 70,
               width: 70,
-              margin: EdgeInsets.only(top: 15),
+              margin: const EdgeInsets.only(top: 15),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: CommonCachedImageCard(image: "${data['image']}"))),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,34 +50,34 @@ class SongCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           GestureDetector(
             onTap: () {
               print("download");
             },
-            child: Icon(
+            child: const Icon(
               Icons.download,
               size: 25,
               color: Colors.white,
             ),
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           GestureDetector(
             onTap: () {
               print("add to favorite");
             },
-            child: Icon(
+            child: const Icon(
               Icons.favorite_border,
               size: 25,
               color: Colors.white,
             ),
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
           GestureDetector(
             onTap: () {
               print("more");
             },
-            child: Icon(
+            child: const Icon(
               Icons.more_vert,
               size: 25,
               color: Colors.white,

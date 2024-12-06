@@ -8,7 +8,6 @@ import '../../widgets/home/best_of_90.dart';
 import '../../widgets/home/bhakti.dart';
 import '../../widgets/home/charts.dart';
 import '../../widgets/home/city_mod.dart';
-import '../../widgets/home/discover.dart';
 import '../../widgets/home/fresh_hit.dart';
 import '../../widgets/home/new_releases.dart';
 import '../../widgets/home/poscast.dart';
@@ -48,7 +47,7 @@ class Home extends StatelessWidget {
                   const SizedBox(height: 30),
                   Expanded(
                     child: ListView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       children: [
                         ///trending now
                         buildTitle(title: "Trending Now"),

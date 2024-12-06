@@ -33,13 +33,13 @@ class SongsList extends StatelessWidget {
                 onTap: () {
                   Get.back();
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios_new_rounded,
                   size: 20,
                   color: Colors.white,
                 ),
               ),
-              actions: [
+              actions: const [
                 Icon(
                   Icons.download,
                   size: 25,
@@ -61,7 +61,7 @@ class SongsList extends StatelessWidget {
               ],
             ),
             body: Obx(() => SongController.to.loading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Column(
@@ -71,7 +71,7 @@ class SongsList extends StatelessWidget {
                           children: [
                             Expanded(
                               flex: 3,
-                              child: Container(
+                              child: SizedBox(
                                   height: 160,
                                   child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10.0),
@@ -79,7 +79,7 @@ class SongsList extends StatelessWidget {
                                           image:
                                               "${SongController.to.songData['image'] ?? SongController.to.artistSongData['image']}"))),
                             ),
-                            SizedBox(width: 15),
+                            const SizedBox(width: 15),
                             Expanded(
                               flex: 3,
                               child: Column(
@@ -124,7 +124,7 @@ class SongsList extends StatelessWidget {
                                           margin: const EdgeInsets.all(8.0),
                                           width: double.infinity,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
+                                            borderRadius: const BorderRadius.all(
                                               Radius.circular(30.0),
                                             ),
                                             color: Theme.of(context)
@@ -135,11 +135,11 @@ class SongsList extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Icon(
+                                              const Icon(
                                                 Icons.play_arrow,
                                                 color: Colors.white,
                                               ),
-                                              SizedBox(width: 5),
+                                              const SizedBox(width: 5),
                                               CommonText(
                                                 text: "Play",
                                                 fontColor:
@@ -151,15 +151,15 @@ class SongsList extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 15),
+                                      const SizedBox(width: 15),
                                       Container(
-                                        padding: EdgeInsets.all(8),
+                                        padding: const EdgeInsets.all(8),
                                         decoration: BoxDecoration(
                                             border:
                                                 Border.all(color: Colors.white),
                                             borderRadius:
                                                 BorderRadius.circular(20.0)),
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.shuffle,
                                           color: Colors.white,
                                         ),
@@ -171,7 +171,7 @@ class SongsList extends StatelessWidget {
                             )
                           ],
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         CommonText(
                           text: 'Songs',
                           fontSize: AppFontSize.fontSizeExtraLarge,
@@ -230,7 +230,7 @@ class SongsList extends StatelessWidget {
                                           }),
                                     ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   )),

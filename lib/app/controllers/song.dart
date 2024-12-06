@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 
 import '../data/repository/song.dart';
-import '../ui/widgets/common/snack_bar.dart';
 import 'main.dart';
 import 'package:audio_session/audio_session.dart';
 
