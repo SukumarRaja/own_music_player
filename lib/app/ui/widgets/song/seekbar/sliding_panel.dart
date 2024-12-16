@@ -6,17 +6,8 @@ import '../../../../controllers/song.dart';
 import '../../../../themes/font_size.dart';
 import '../../common/text.dart';
 
-class SlidingPanelCard extends StatefulWidget {
+class SlidingPanelCard extends StatelessWidget {
   const SlidingPanelCard({super.key});
-
-  @override
-  State<SlidingPanelCard> createState() => _SlidingPanelCardState();
-}
-
-class _SlidingPanelCardState extends State<SlidingPanelCard> {
-  var position = SongController.to.player.position;
-  var duration = SongController.to.player.duration;
-  var bufferedPosition = SongController.to.player.bufferedPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -50,50 +41,87 @@ class _SlidingPanelCardState extends State<SlidingPanelCard> {
               child: StreamBuilder(
                   stream: SongController.to.player.durationStream,
                   builder: (context, snap) {
-                    return SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        thumbShape: HiddenThumbComponentShape(),
-                        overlayShape: SliderComponentShape.noThumb,
-                        activeTrackColor: Colors.white,
-                        inactiveTrackColor: Colors.white.withOpacity(.3),
-                        trackShape: const RectangularSliderTrackShape(),
-                      ),
-                      child: ExcludeSemantics(
-                        child: Slider(
-                          max: duration!.inMilliseconds.toDouble(),
-                          value: min(
-                            position.inMilliseconds.toDouble(),
-                            duration!.inMilliseconds.toDouble(),
+                    print("kljlkjkl ${snap.data == null}");
+                    var state = snap.connectionState;
+                    if (snap.data == null) {
+                      return CircularProgressIndicator();
+                    } else {
+                      return SliderTheme(
+                          data: SliderTheme.of(context).copyWith(
+                            thumbShape: HiddenThumbComponentShape(),
+                            overlayShape: SliderComponentShape.noThumb,
+                            activeTrackColor: Colors.white,
+                            inactiveTrackColor: Colors.white.withOpacity(.3),
+                            trackShape: const RectangularSliderTrackShape(),
                           ),
-                          onChanged: (value) {},
-                        ),
-                      ),
-                    );
+                          child: StreamBuilder(
+                              stream: SongController.to.player.positionStream,
+                              builder: (context, sp) {
+                                if (sp.data == null) {
+                                  return CircularProgressIndicator();
+                                } else {
+                                  return ExcludeSemantics(
+                                    child: Slider(
+                                      max: SongController
+                                          .to.player.duration!.inMilliseconds
+                                          .toDouble(),
+                                      value: min(
+                                        SongController
+                                            .to.player.position.inMilliseconds
+                                            .toDouble(),
+                                        SongController
+                                            .to.player.duration!.inMilliseconds
+                                            .toDouble(),
+                                      ),
+                                      onChanged: (value) {},
+                                    ),
+                                  );
+                                }
+                              }));
+                    }
                   }),
             ),
             StreamBuilder(
                 stream: SongController.to.player.positionStream,
                 builder: (context, snap) {
-                  return SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                      inactiveTrackColor: Colors.transparent,
-                      activeTrackColor: Colors.white,
-                      thumbColor: Colors.white,
-                      thumbShape: const RoundSliderThumbShape(
-                        enabledThumbRadius: 8.0,
-                      ),
-                      overlayShape: SliderComponentShape.noThumb,
-                    ),
-                    child: Slider(
-                      max: duration!.inMilliseconds.toDouble(),
-                      value: min(
-                        position.inMilliseconds.toDouble(),
-                        duration!.inMilliseconds.toDouble(),
-                      ),
-                      onChanged: (value) {},
-                      onChangeEnd: (value) {},
-                    ),
-                  );
+                  print("lkjlkjlj ${snap.data == null}");
+                  if (snap.data == null) {
+                    return CircularProgressIndicator();
+                  } else {
+                    return SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          inactiveTrackColor: Colors.transparent,
+                          activeTrackColor: Colors.white,
+                          thumbColor: Colors.white,
+                          thumbShape: const RoundSliderThumbShape(
+                            enabledThumbRadius: 8.0,
+                          ),
+                          overlayShape: SliderComponentShape.noThumb,
+                        ),
+                        child: StreamBuilder(
+                            stream: SongController.to.player.durationStream,
+                            builder: (context, sn) {
+                              if (sn.data == null) {
+                                return CircularProgressIndicator();
+                              } else {
+                                return Slider(
+                                  max: SongController
+                                      .to.player.duration!.inMilliseconds
+                                      .toDouble(),
+                                  value: min(
+                                    SongController
+                                        .to.player.position.inMilliseconds
+                                        .toDouble(),
+                                    SongController
+                                        .to.player.duration!.inMilliseconds
+                                        .toDouble(),
+                                  ),
+                                  onChanged: (value) {},
+                                  onChangeEnd: (value) {},
+                                );
+                              }
+                            }));
+                  }
                 }),
           ],
         ),
@@ -107,8 +135,11 @@ class _SlidingPanelCardState extends State<SlidingPanelCard> {
                   stream: SongController.to.player.positionStream,
                   builder: (context, snap) {
                     return CommonText(
-                      text:
-                          RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$position')?.group(1) ?? '$position',
+                      text: RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
+                              .firstMatch(
+                                  '${SongController.to.player.position}')
+                              ?.group(1) ??
+                          '${SongController.to.player.position}',
                       fontColor: Theme.of(context).disabledColor,
                       fontSize: AppFontSize.fontSizeSmall,
                     );
@@ -117,8 +148,11 @@ class _SlidingPanelCardState extends State<SlidingPanelCard> {
                   stream: SongController.to.player.durationStream,
                   builder: (context, snap) {
                     return CommonText(
-                        text:
-                            RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$').firstMatch('$duration')?.group(1) ?? '$duration');
+                        text: RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
+                                .firstMatch(
+                                    '${SongController.to.player.duration}')
+                                ?.group(1) ??
+                            '${SongController.to.player.duration}');
                   }),
             ],
           ),

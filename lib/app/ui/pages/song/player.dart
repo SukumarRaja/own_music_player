@@ -15,6 +15,8 @@ class SongPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "lkjkljl ${SongController.to.songDetail['title'].toString().replaceAll('&quot;', '')}");
     return GetBuilder(
         init: SongController(),
         initState: (_) {
@@ -61,15 +63,17 @@ class SongPlayer extends StatelessWidget {
                                               "${SongController.to.songDetail['image']}"))),
                               const SizedBox(height: 25),
                               CommonText(
-                                text:
-                                    "${SongController.to.songDetail['title']}",
+                                text: SongController.to.songDetail['title']
+                                    .toString()
+                                    .replaceAll('&quot;', ''),
                                 fontColor: Colors.white,
                                 fontSize: AppFontSize.fontSizeOverLarge,
                                 fontWeight: FontWeight.w800,
                               ),
                               AnimatedText(
-                                text:
-                                    "${SongController.to.songDetail['subtitle']}",
+                                text: SongController.to.songDetail['subtitle']
+                                    .toString()
+                                    .replaceAll('&quot;', ''),
                                 pauseAfterRound: const Duration(seconds: 1),
                                 showFadingOnlyWhenScrolling: true,
                                 fadingEdgeEndFraction: 0.05,
