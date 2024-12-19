@@ -36,13 +36,13 @@ class SongCard extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
                 CommonText(
-                  text: "${data['title']}",
+                  text: data['title'].toString().replaceAll('&quot;', ''),
                   fontColor: Colors.white,
                   fontSize: AppFontSize.fontSizeLarge,
                   fontWeight: FontWeight.w600,
                 ),
                 CommonText(
-                  text: "${data['subtitle']}",
+                  text: data['subtitle'].toString().replaceAll('&quot;', ''),
                   fontColor: Colors.grey,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'regular',

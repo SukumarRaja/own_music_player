@@ -5,7 +5,9 @@ import 'seekbar/control_buttons.dart';
 import 'seekbar/sliding_panel.dart';
 
 class SeekBar extends StatelessWidget {
-  const SeekBar({super.key});
+  const SeekBar({super.key, required this.isFromMini});
+
+  final bool isFromMini;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class SeekBar extends StatelessWidget {
               const SizedBox(height: 10),
               const SlidingPanelCard(),
               const SizedBox(height: 30),
-              const ControlButtons(),
+              ControlButtons(isFormMini: isFromMini),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

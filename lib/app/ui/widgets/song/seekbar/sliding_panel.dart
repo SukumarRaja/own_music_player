@@ -41,10 +41,8 @@ class SlidingPanelCard extends StatelessWidget {
               child: StreamBuilder(
                   stream: SongController.to.player.durationStream,
                   builder: (context, snap) {
-                    print("kljlkjkl ${snap.data == null}");
-                    var state = snap.connectionState;
                     if (snap.data == null) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     } else {
                       return SliderTheme(
                           data: SliderTheme.of(context).copyWith(
@@ -58,7 +56,7 @@ class SlidingPanelCard extends StatelessWidget {
                               stream: SongController.to.player.positionStream,
                               builder: (context, sp) {
                                 if (sp.data == null) {
-                                  return CircularProgressIndicator();
+                                  return const SizedBox();
                                 } else {
                                   return ExcludeSemantics(
                                     child: Slider(
@@ -84,9 +82,8 @@ class SlidingPanelCard extends StatelessWidget {
             StreamBuilder(
                 stream: SongController.to.player.positionStream,
                 builder: (context, snap) {
-                  print("lkjlkjlj ${snap.data == null}");
                   if (snap.data == null) {
-                    return CircularProgressIndicator();
+                    return const SizedBox();
                   } else {
                     return SliderTheme(
                         data: SliderTheme.of(context).copyWith(
@@ -102,7 +99,7 @@ class SlidingPanelCard extends StatelessWidget {
                             stream: SongController.to.player.durationStream,
                             builder: (context, sn) {
                               if (sn.data == null) {
-                                return CircularProgressIndicator();
+                                return const SizedBox();
                               } else {
                                 return Slider(
                                   max: SongController
@@ -117,7 +114,10 @@ class SlidingPanelCard extends StatelessWidget {
                                         .toDouble(),
                                   ),
                                   onChanged: (value) {},
-                                  onChangeEnd: (value) {},
+                                  onChangeEnd: (value) {
+                                    SongController.to.player.seek(
+                                        Duration(milliseconds: value.round()));
+                                  },
                                 );
                               }
                             }));

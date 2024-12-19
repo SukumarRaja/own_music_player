@@ -9,18 +9,20 @@ import '../../widgets/common/text.dart';
 import '../../widgets/song/seek_bar.dart';
 
 class SongPlayer extends StatelessWidget {
-  const SongPlayer({super.key, required this.songId});
+  const SongPlayer({super.key, this.songId, this.isFromMini = false});
 
-  final String songId;
+  final dynamic songId;
+  final bool isFromMini;
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "lkjkljl ${SongController.to.songDetail['title'].toString().replaceAll('&quot;', '')}");
+    // print("kljkljkl ${"https://aac.saavncdn.com/803/a4a46c89f4fc4a7c80c4694da79abe5a_96.mp4".replaceAll("_96.", "_320 kbps.".replaceAll(' kbps', ''))}");
     return GetBuilder(
         init: SongController(),
         initState: (_) {
-          SongController.to.getSongDetail(songId: songId);
+          if (isFromMini == false) {
+            SongController.to.getSongDetail(songId: songId);
+          }
         },
         builder: (_) {
           return Scaffold(
@@ -84,7 +86,7 @@ class SongPlayer extends StatelessWidget {
                                     color: Colors.white.withOpacity(.4),
                                     fontFamily: 'regular'),
                               ),
-                              const SeekBar(),
+                              SeekBar(isFromMini: isFromMini),
                             ],
                           ),
                         )

@@ -94,5 +94,14 @@ class AuthController extends GetxController {
     }
   }
 
-  login() async {}
+  login() async {
+    loginLoading = true;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('name', AuthController.to.name.text.trim());
+    storeLocalDevice(body: {'token': "1"});
+    Future.delayed(const Duration(seconds: 2), () {
+      loginLoading = false;
+      Get.toNamed('/home-main');
+    });
+  }
 }

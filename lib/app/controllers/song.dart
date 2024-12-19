@@ -1,3 +1,4 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
@@ -116,5 +117,25 @@ class SongController extends GetxController {
     } on PlayerException catch (e) {
       print("Error loading audio source: $e");
     }
+  }
+
+  addSongsToQueue({required MediaItem item}) async {
+    AudioSource audioSource;
+    try {
+      if (item.artUri.toString().startsWith('file:')) {
+        audioSource = AudioSource.uri(Uri.file(item.extras!['url'].toString()));
+      }else{
+        print("kljkljkl ${"https://aac.saavncdn.com/803/a4a46c89f4fc4a7c80c4694da79abe5a_96.mp4".replaceAll("_96.", "320 kbps".replaceAll(' kbps', ''))}");
+        var qu = "320 kbps";
+        // audioSource = AudioSource.uri(
+        //   Uri.parse(
+        //     item.extras!['url'].toString().replaceAll(
+        //       '_96.',
+        //       "_${preferredQuality.replaceAll(' kbps', '')}.",
+        //     ),
+        //   ),
+        // );
+      }
+    } catch (e) {}
   }
 }

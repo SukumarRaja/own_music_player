@@ -5,7 +5,9 @@ import '../../../../controllers/song.dart';
 import '../../../../utility/utility.dart';
 
 class ControlButtons extends StatefulWidget {
-  const ControlButtons({super.key});
+  const ControlButtons({super.key, required this.isFormMini});
+
+  final bool isFormMini;
 
   @override
   State<ControlButtons> createState() => _ControlButtonsState();
@@ -14,10 +16,13 @@ class ControlButtons extends StatefulWidget {
 class _ControlButtonsState extends State<ControlButtons> {
   @override
   void initState() {
-    SongController.to.playAudio(
-        url: songDecode(
-            mediaUrl:
-                "${SongController.to.songDetail['more_info']['encrypted_media_url']}"));
+    if (widget.isFormMini == false) {
+      SongController.to.playAudio(
+          url: songDecode(
+              mediaUrl:
+                  "${SongController.to.songDetail['more_info']['encrypted_media_url']}"));
+    }
+
     super.initState();
   }
 
@@ -53,11 +58,11 @@ class _ControlButtonsState extends State<ControlButtons> {
                     return FloatingActionButton(
                       elevation: 10,
                       backgroundColor: Colors.white,
-                      onPressed: () {
+                      onPressed: () async {
                         if (playing == false) {
-                          SongController.to.player.play();
+                          await SongController.to.player.play();
                         } else {
-                          SongController.to.player.stop();
+                          await SongController.to.player.stop();
                         }
                       },
                       child: Icon(

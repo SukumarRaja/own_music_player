@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../controllers/home.dart';
 import '../../../themes/font_size.dart';
 import '../../widgets/common/searchbar.dart';
@@ -16,9 +17,31 @@ import '../../widgets/home/top_albums.dart';
 import '../../widgets/home/top_genres.dart';
 import '../../widgets/home/top_playlist.dart';
 import '../../widgets/home/trending_now.dart';
+import '../search.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    getName();
+    super.initState();
+  }
+
+  String name = "";
+
+  getName() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      name = pref.getString('name')!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +61,16 @@ class Home extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                   CommonText(
-                    text: "Suku",
+                    text: name,
                     fontSize: AppFontSize.fontSizeExtraLarge,
                     fontWeight: FontWeight.w600,
                     fontColor: Colors.white,
                   ),
-                  CommonSearchBar(text: "Search", onTap: () {}),
+                  CommonSearchBar(
+                      text: "Search",
+                      onTap: () {
+                        Get.to(() => const Search());
+                      }),
                   const SizedBox(height: 30),
                   Expanded(
                     child: ListView(
@@ -114,6 +141,7 @@ class Home extends StatelessWidget {
                         buildTitle(title: "Podcast"),
                         const SizedBox(height: 8),
                         const PodCast(),
+                        const SizedBox(height: 60),
                       ],
                     ),
                   ),

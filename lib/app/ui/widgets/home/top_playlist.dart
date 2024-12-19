@@ -49,7 +49,8 @@ class TopPlaylist extends StatelessWidget {
                     child: Column(
                       children: [
                         CommonText(
-                          text: "${data['title']}",
+                          text:
+                              data['title'].toString().replaceAll('&quot;', ''),
                           fontColor: Colors.white,
                         ),
                         CommonText(

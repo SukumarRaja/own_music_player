@@ -5,7 +5,6 @@ import '../../../controllers/auth.dart';
 import '../../../themes/font_size.dart';
 import '../../../utility/utility.dart';
 import '../../widgets/common/button.dart';
-import '../../widgets/common/intl_phone_field.dart';
 import '../../widgets/common/text.dart';
 import '../../widgets/common/textform_field.dart';
 
@@ -15,15 +14,39 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).cardColor,
+      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              Image.asset(
-                "assets/images/logo.png",
-                height: 200,
+              // Image.asset(
+              //   "assets/images/logo.png",
+              //   height: 200,
+              // ),
+              // const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonText(
+                        text: 'Welcome',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        fontColor: Theme.of(context).secondaryHeaderColor,
+                      ),
+                      CommonText(
+                        text: 'Beat',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                        fontColor: Theme.of(context).secondaryHeaderColor,
+                      ),
+                    ],
+                  ),
+                ),
               ),
               const SizedBox(height: 10),
               Padding(
@@ -52,30 +75,38 @@ class Login extends StatelessWidget {
                               return nameValidator(value: data);
                             },
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: IntlPhoneField(
-                              maxLength: 10,
-                              hintText: 'enter_phone',
-                              controller: AuthController.to.phone,
-                              initialCountryCode: "IN",
-                              fontFamily: "regular",
-                              isEnableValidation: true,
-                              onCountryChanged: (data) {
-                                AuthController.to.countryCode =
-                                    data.countryCode;
-                              },
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(8),
+                          //   child: IntlPhoneField(
+                          //     maxLength: 10,
+                          //     hintText: 'enter_phone',
+                          //     controller: AuthController.to.phone,
+                          //     initialCountryCode: "IN",
+                          //     fontFamily: "regular",
+                          //     isEnableValidation: true,
+                          //     onCountryChanged: (data) {
+                          //       AuthController.to.countryCode =
+                          //           data.countryCode;
+                          //     },
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 15),
-                    CommonButton(
-                        text: "sign_in",
-                        onPressed: () {
-                          Get.toNamed('/home-main');
-                        }),
+                    Obx(
+                      () => AuthController.to.loginLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : CommonButton(
+                              text: "sign_in",
+                              color: Theme.of(context).secondaryHeaderColor,
+                              onPressed: () async {
+                                if (AuthController.to.loginFormKey.currentState!
+                                    .validate()) {
+                                  AuthController.to.login();
+                                }
+                              }),
+                    )
                   ],
                 ),
               ),

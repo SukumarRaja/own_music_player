@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/home.dart';
 import '../../../controllers/main.dart';
+import '../../widgets/mini_player.dart';
 import 'home.dart';
 
 class HomeMain extends StatefulWidget {
@@ -69,7 +70,12 @@ class _HomeMainState extends State<HomeMain> {
             ],
           ),
         ),
-        body: Obx(() => pages[MainController.to.currentIndex]),
+        body: Obx(() => Stack(
+              children: [
+                pages[MainController.to.currentIndex],
+                const Positioned(bottom: 0, right: 10, left: 10, child: MiniPlayer())
+              ],
+            )),
       ),
     );
   }
